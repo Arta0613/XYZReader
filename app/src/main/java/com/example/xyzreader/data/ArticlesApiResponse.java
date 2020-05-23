@@ -76,7 +76,7 @@ public class ArticlesApiResponse {
 
     @NonNull
     public final Double getAspectRatio() {
-        return aspectRatio != null ? aspectRatio : -1;
+        return aspectRatio != null ? aspectRatio : 1.5;
     }
 
     @NonNull

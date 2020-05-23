@@ -61,4 +61,9 @@ public class ArticleItem {
             return new Date();
         }
     }
+
+    @NonNull
+    public final Article getArticle() {
+        return article;
+    }
 }

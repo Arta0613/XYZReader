@@ -27,6 +27,10 @@ public class ArticleListActivity extends AppCompatActivity {
 
         binding.setLifecycleOwner(this);
         binding.setViewModel(articleListViewModel);
+
+        articleListViewModel.getArticleEntitiesLiveData().observe(
+                this, articleListViewModel::updateArticles
+        );
     }
 
     @NonNull

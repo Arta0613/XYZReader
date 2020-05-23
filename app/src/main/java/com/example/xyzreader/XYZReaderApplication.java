@@ -8,7 +8,13 @@ import com.example.xyzreader.di.AppContainer;
 
 public class XYZReaderApplication extends Application {
 
-    @NonNull private final AppContainer appContainer = new AppContainer();
+    private AppContainer appContainer;
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        appContainer = new AppContainer(getApplicationContext());
+    }
 
     @NonNull
     public final AppContainer getAppContainer() {

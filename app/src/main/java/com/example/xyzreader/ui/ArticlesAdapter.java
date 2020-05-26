@@ -18,6 +18,7 @@ import java.util.List;
 public class ArticlesAdapter extends RecyclerView.Adapter<ArticlesAdapter.ArticleViewHolder> {
 
     @NonNull private List<ArticleItem> articleItems = new ArrayList<>();
+    private ArticleClickListener listener;
 
     @NonNull
     @Override
@@ -45,6 +46,10 @@ public class ArticlesAdapter extends RecyclerView.Adapter<ArticlesAdapter.Articl
         this.articleItems = articleItems;
     }
 
+    public void setClickListener(@NonNull final ArticleClickListener listener) {
+        this.listener = listener;
+    }
+
     class ArticleViewHolder extends RecyclerView.ViewHolder {
 
         @NonNull
@@ -56,6 +61,7 @@ public class ArticlesAdapter extends RecyclerView.Adapter<ArticlesAdapter.Articl
         }
 
         void bind(final int position) {
+            binding.getRoot().setOnClickListener(l -> listener.onClick(position));
             binding.setVariable(BR.articleItem, articleItems.get(position));
             binding.executePendingBindings();
         }

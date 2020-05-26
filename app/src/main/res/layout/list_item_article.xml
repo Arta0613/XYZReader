@@ -25,9 +25,10 @@
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/thumbnail"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
                 android:background="@color/colorAccent"
+                android:scaleType="fitXY"
                 app:imageUrl="@{articleItem.thumbnail}" />
 
             <androidx.appcompat.widget.AppCompatTextView

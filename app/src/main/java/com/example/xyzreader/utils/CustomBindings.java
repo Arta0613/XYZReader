@@ -61,7 +61,7 @@ public class CustomBindings {
             final int initialPosition
     ) {
         viewPager.setAdapter(adapter);
-        viewPager.setCurrentItem(initialPosition);
+        viewPager.setCurrentItem(initialPosition, false);
     }
 
     private static class DrawableAlwaysCrossFadeFactory implements TransitionFactory<Drawable> {

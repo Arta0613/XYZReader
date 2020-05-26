@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.xyzreader.repository.ArticlesRepository;
+import com.example.xyzreader.ui.ArticleDetailViewModel;
 import com.example.xyzreader.ui.ArticleListViewModel;
 
 public class ViewModelFactory implements ViewModelProvider.Factory {
@@ -20,6 +21,8 @@ public class ViewModelFactory implements ViewModelProvider.Factory {
     public <T extends ViewModel> T create(@NonNull final Class<T> modelClass) {
         if (modelClass.isAssignableFrom(ArticleListViewModel.class)) {
             return (T) new ArticleListViewModel(repository);
+        } else if (modelClass.isAssignableFrom(ArticleDetailViewModel.class)) {
+            return (T) new ArticleDetailViewModel(repository);
         }
 
         throw new IllegalArgumentException("Unknown ViewModel class");

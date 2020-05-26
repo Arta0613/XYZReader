@@ -38,6 +38,10 @@ public class ArticleListViewModel extends ViewModel {
         load();
     }
 
+    public void setAdapterClickListener(@NonNull final ArticleClickListener listener) {
+        articlesAdapter.setClickListener(listener);
+    }
+
     @Override
     protected void onCleared() {
         disposable.clear();
@@ -111,6 +115,7 @@ public class ArticleListViewModel extends ViewModel {
     }
 
     private void setAdapter(@NonNull final List<ArticleItem> articleItems) {
+        repository.setArticleItems(articleItems);
         articlesAdapter.setArticleItems(articleItems);
         articlesAdapter.notifyDataSetChanged();
     }

@@ -1,5 +1,6 @@
 package com.example.xyzreader.domain;
 
+import android.text.Html;
 import android.text.format.DateUtils;
 import android.util.Log;
 
@@ -11,6 +12,8 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Locale;
 import java.util.Objects;
+
+import static androidx.core.text.HtmlCompat.FROM_HTML_MODE_COMPACT;
 
 public class ArticleItem {
 
@@ -65,5 +68,25 @@ public class ArticleItem {
     @NonNull
     public final Article getArticle() {
         return article;
+    }
+
+    @NonNull
+    public final String getBody() {
+        return htmlFormattedBody(article.getBody());
+    }
+
+    @NonNull
+    public final String getSampleBody() {
+        return htmlFormattedBody(article.getBody().substring(0, 1000));
+    }
+
+    @NonNull
+    public String getCover() {
+        return article.getCoverImage();
+    }
+
+    @NonNull
+    private String htmlFormattedBody(@NonNull final String body) {
+        return Html.fromHtml(body.replaceAll("(\r\n|\n)", "<br />"), FROM_HTML_MODE_COMPACT).toString();
     }
 }

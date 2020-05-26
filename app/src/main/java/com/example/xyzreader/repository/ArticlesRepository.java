@@ -20,10 +20,13 @@ public class ArticlesRepository {
 
     @NonNull private final ArticlesLocalDataSource localDataSource;
 
+    private List<ArticleItem> articleItems;
+    private ArticleItem currentArticleItem;
+    private int initialPosition;
+
     public ArticlesRepository(@NonNull final Context context) {
         remoteDataSource = new ArticlesRemoteDataSource();
         localDataSource = new ArticlesLocalDataSource(context);
-
     }
 
     @NonNull
@@ -41,5 +44,29 @@ public class ArticlesRepository {
             @NonNull final List<ArticleEntity> articleEntities
     ) {
         return localDataSource.insertArticles(articleEntities);
+    }
+
+    public List<ArticleItem> getArticleItems() {
+        return articleItems;
+    }
+
+    public void setArticleItems(final List<ArticleItem> articleItems) {
+        this.articleItems = articleItems;
+    }
+
+    public ArticleItem getCurrentArticleItem() {
+        return currentArticleItem;
+    }
+
+    public void setCurrentArticleItem(final ArticleItem currentArticleItem) {
+        this.currentArticleItem = currentArticleItem;
+    }
+
+    public final int getInitialPosition() {
+        return initialPosition;
+    }
+
+    public void setInitialPosition(final int position) {
+        this.initialPosition = position;
     }
 }

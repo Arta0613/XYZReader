@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.example.xyzreader.ui.ArticleDetailViewModel" />
+    </data>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:elevation="16dp">
+
+        <LinearLayout
+            android:id="@+id/meta_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:orientation="vertical">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/article_byline"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#333"
+                android:elevation="18dp"
+                android:padding="16dp"
+                android:text="@{viewModel.subtitle}"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                android:textColor="#8fff" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/article_body"
+                android:layout_width="match_parent"
+                android:layout_height="1000dp"
+                android:layout_gravity="center"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:lineSpacingMultiplier="@fraction/detail_body_line_spacing_multiplier"
+                android:scrollbars="vertical"
+                android:text="@{viewModel.body}"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textSize="@dimen/detail_body_text_size" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center|bottom"
+                android:onClick="@{() -> viewModel.showMore()}"
+                android:text="@string/show_more" />
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+</layout>

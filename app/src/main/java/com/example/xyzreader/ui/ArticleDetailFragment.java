@@ -17,10 +17,14 @@ import com.example.xyzreader.R;
 import com.example.xyzreader.XYZReaderApplication;
 import com.example.xyzreader.databinding.FragmentArticleDetailBinding;
 import com.example.xyzreader.repository.ArticlesRepository;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.Objects;
 
 public class ArticleDetailFragment extends Fragment {
+
+    private static final int REQUEST_CODE = 10040;
+
 
     @Nullable
     @Override
@@ -28,7 +32,7 @@ public class ArticleDetailFragment extends Fragment {
                              @Nullable final ViewGroup container,
                              @Nullable final Bundle savedInstanceState) {
 
-        final FragmentArticleDetailBinding binding = DataBindingUtil.inflate(inflater, R.layout.fragment_article_detail, container, false);
+        FragmentArticleDetailBinding binding = DataBindingUtil.inflate(inflater, R.layout.fragment_article_detail, container, false);
         final ArticleDetailViewModel viewModel = new ViewModelProvider(requireActivity()).get(ArticleDetailViewModel.class);
 
         viewModel.showMore.observe(getViewLifecycleOwner(), aVoid -> {
@@ -38,15 +42,25 @@ public class ArticleDetailFragment extends Fragment {
         });
 
         viewModel.share.observe(getViewLifecycleOwner(), aVoid ->
-                startActivity(Intent.createChooser(ShareCompat.IntentBuilder.from(Objects.requireNonNull(getActivity()))
-                        .setType("text/plain")
-                        .setText(getShareText())
-                        .getIntent(), getString(R.string.action_share))));
+                startActivityForResult(getShareIntent(), REQUEST_CODE)
+        );
 
         binding.setLifecycleOwner(getViewLifecycleOwner());
         binding.setViewModel(viewModel);
 
         return binding.getRoot();
+    }
+
+    @Override
+    public void onActivityResult(final int requestCode, final int resultCode,
+                                 @Nullable final Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == REQUEST_CODE) {
+            Snackbar.make(Objects.requireNonNull(getActivity()).findViewById(android.R.id.content), R.string.sharing, Snackbar.LENGTH_LONG)
+                    .setActionTextColor(Objects.requireNonNull(getContext()).getColor(R.color.colorAccent))
+                    .show();
+        }
     }
 
     @NonNull
@@ -58,5 +72,13 @@ public class ArticleDetailFragment extends Fragment {
     private ArticlesRepository getRepository() {
         return ((XYZReaderApplication) Objects.requireNonNull(getActivity()).getApplication())
                 .getAppContainer().getArticlesRepository();
+    }
+
+    @NonNull
+    private Intent getShareIntent() {
+        return Intent.createChooser(ShareCompat.IntentBuilder.from(Objects.requireNonNull(getActivity()))
+                .setType("text/plain")
+                .setText(getShareText())
+                .getIntent(), getString(R.string.action_share));
     }
 }

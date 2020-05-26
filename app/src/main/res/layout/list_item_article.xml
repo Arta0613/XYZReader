@@ -14,6 +14,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="4dp"
         android:clickable="true"
+        android:elevation="4dp"
         android:clipToPadding="false"
         android:focusable="true"
         android:foreground="?selectableItemBackground">
@@ -26,6 +27,7 @@
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/thumbnail"
                 android:layout_width="match_parent"
+                android:transitionName="image"
                 android:layout_height="150dp"
                 android:background="@color/colorAccent"
                 android:scaleType="fitXY"
@@ -55,8 +57,7 @@
                 android:paddingLeft="16dp"
                 android:paddingRight="16dp"
                 android:paddingBottom="16dp"
-                android:text="@{articleItem.subtitle}"
-                android:textColor="#6000" />
+                android:text="@{articleItem.subtitle}" />
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 </layout>
